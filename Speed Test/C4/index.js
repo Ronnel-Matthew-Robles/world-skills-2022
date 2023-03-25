@@ -1,7 +1,6 @@
 //Here is your CODE!
 
 var render = () => {
-  console.log("hi");
   var selection = window.getSelection().toString();
   if (selection) {
     var range = window.getSelection().getRangeAt(0);

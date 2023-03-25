@@ -26,8 +26,6 @@ body {
   border-left: 0;
   border-right: 0;
   border-radius: 76px;
-  -moz-border-radius: 76px;
-  -webkit-border-radius: 76px;
 }
 
 .yin {
@@ -37,8 +35,6 @@ body {
   margin-top: -38px;
   position: absolute;
   border-radius: 40px;
-  -moz-border-radius: 40px;
-  -webkit-border-radius: 40px;
 }
 .yang {
   background: #003478;
@@ -47,8 +43,6 @@ body {
   margin: -38px 0 0 75px;
   position: absolute;
   border-radius: 40px;
-  -moz-border-radius: 40px;
-  -webkit-border-radius: 40px;
 }
 
 .fullstr {
@@ -70,35 +64,23 @@ body {
 #strcontainer1 {
   position: absolute;
   margin: 20px 0 0 45px;
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
 
 #strcontainer2 {
   position: absolute;
   margin: 175px 0 0 45px;
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
   transform: rotate(45deg);
 }
 
 #strcontainer3 {
   position: absolute;
   margin: 20px 0 0 275px;
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
   transform: rotate(45deg);
 }
 
 #strcontainer4 {
   position: absolute;
   margin: 175px 0 0 275px;
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }

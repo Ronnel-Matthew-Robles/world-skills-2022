@@ -7,10 +7,6 @@
   border-right: 120px solid transparent;
   border-bottom: 90px solid yellow;
   border-left: 120px solid transparent;
-  -webkit-transform: rotate(37deg);
-  -moz-transform: rotate(37deg);
-  -ms-transform: rotate(37deg);
-  -o-transform: rotate(37deg);
   transform: rotate(37deg);
 }
 
@@ -25,10 +21,6 @@
   border-bottom: 84px solid yellow;
   border-left: 28px solid transparent;
   border-right: 28px solid transparent;
-  -webkit-transform: rotate(323deg);
-  -moz-transform: rotate(323deg);
-  -ms-transform: rotate(323deg);
-  -o-transform: rotate(323deg);
   transform: rotate(323deg);
 }
 
@@ -43,10 +35,6 @@
   border-right: 120px solid transparent;
   border-bottom: 90px solid yellow;
   border-left: 120px solid transparent;
-  -webkit-transform: rotate(286deg);
-  -moz-transform: rotate(286deg);
-  -ms-transform: rotate(286deg);
-  -o-transform: rotate(286deg);
   transform: rotate(286deg);
 }
 

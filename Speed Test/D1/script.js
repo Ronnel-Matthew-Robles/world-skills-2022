@@ -22,17 +22,16 @@ function displayResults(actualAnswers, submittedAnswers) {
     if (actual === submitted) {
       score++;
     }
-    let row = document.createElement("tr");
-    let numCell = document.createElement("td");
-    numCell.textContent = i + 1;
-    let actualCell = document.createElement("td");
-    actualCell.textContent = actual;
-    let submittedCell = document.createElement("td");
-    submittedCell.textContent = submitted;
-    row.appendChild(numCell);
-    row.appendChild(actualCell);
-    row.appendChild(submittedCell);
-    document.querySelector("#results tbody").appendChild(row);
+
+    var resultsDiv = document.querySelector("#results tbody");
+
+    resultsDiv.innerHTML += `
+      <tr>
+        <td>${i + 1}</td>
+        <td>${actual}</td>
+        <td>${submitted}</td>
+      </tr>
+    `;
   }
   document.querySelector("#score").textContent = `${score}/${numRows}`;
 }

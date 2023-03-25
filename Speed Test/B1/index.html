@@ -1,36 +1,55 @@
-<!DOCTYPE html> <html> <head> <title>Number Boxes</title> <style> .box { width: 80px; height: 80px; border: 1px solid black; display: inline-block; text-align: center; line-height: 80px; cursor: pointer; }
-	.highlight {
-		border-width: 3px;
-		border-color: gold;
-		background-color: gold;
-	}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Number Boxes</title>
+    <style>
+      .box {
+        width: 80px;
+        height: 80px;
+        border: 1px solid black;
+        display: inline-block;
+        text-align: center;
+        line-height: 80px;
+        cursor: pointer;
+      }
+      .highlight {
+        border-width: 3px;
+        border-color: gold;
+        background-color: gold;
+      }
 
-	#total {
-		margin-top: 10px;
-		font-weight: bold;
-	}
-</style>
-</head> <body> <div class="box" id="box1">10</div> <div class="box" id="box2">32</div> <div class="box" id="box3">64</div> <div class="box" id="box4">-15</div>
-<div id="total"></div>
+      #total {
+        margin-top: 10px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box" id="box1">10</div>
+    <div class="box" id="box2">32</div>
+    <div class="box" id="box3">64</div>
+    <div class="box" id="box4">-15</div>
+    <div id="total"></div>
 
-<script>
-	let boxes = document.querySelectorAll('.box');
-	let total = 0;
+    <script>
+      let boxes = document.querySelectorAll(".box");
+      let total = 0;
 
-	boxes.forEach(function(box) {
-		box.addEventListener('click', function() {
-			let num = parseInt(this.innerHTML);
+      boxes.forEach(function (box) {
+        box.addEventListener("click", function () {
+          let num = parseInt(this.innerHTML);
 
-			if (this.classList.contains('highlight')) {
-				this.classList.remove('highlight');
-				total -= num;
-			} else {
-				this.classList.add('highlight');
-				total += num;
-			}
+          if (this.classList.contains("highlight")) {
+            this.classList.remove("highlight");
+            total -= num;
+          } else {
+            this.classList.add("highlight");
+            total += num;
+          }
 
-			document.getElementById('total').innerHTML = 'Total: ' + total;
-		});
-	});
-</script>
-</body> </html>
+          document.getElementById("total").innerHTML = "Total: " + total;
+        });
+      });
+    </script>
+  </body>
+</html>
