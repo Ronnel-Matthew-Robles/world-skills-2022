@@ -7,11 +7,11 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-RewriteBase /XX_module_b/animation/
+RewriteBase /module_b/animation/
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /XX_module_b/animation/index.php [L]
+RewriteRule . /module_b/animation/index.php [L]
 </IfModule>
 
 # END WordPress

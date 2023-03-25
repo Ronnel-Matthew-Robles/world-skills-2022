@@ -502,10 +502,15 @@ function twenty_twenty_one_skip_link_focus_fix() {
 	} else {
 		// The following is minified via `npx terser --compress --mangle -- assets/js/skip-link-focus-fix.js`.
 		?>
-		<script>
-		/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",(function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())}),!1);
-		</script>
-		<?php
+<script>
+/(trident|msie)/i.test(navigator.userAgent) && document.getElementById && window.addEventListener && window
+    .addEventListener("hashchange", (function() {
+        var t, e = location.hash.substring(1);
+        /^[A-z0-9_-]+$/.test(e) && (t = document.getElementById(e)) && (/^(?:a|select|input|button|textarea)$/i
+            .test(t.tagName) || (t.tabIndex = -1), t.focus())
+    }), !1);
+</script>
+<?php
 	}
 }
 add_action( 'wp_print_footer_scripts', 'twenty_twenty_one_skip_link_focus_fix' );
@@ -632,12 +637,12 @@ function twentytwentyone_the_html_classes() {
  */
 function twentytwentyone_add_ie_class() {
 	?>
-	<script>
-	if ( -1 !== navigator.userAgent.indexOf( 'MSIE' ) || -1 !== navigator.appVersion.indexOf( 'Trident/' ) ) {
-		document.body.classList.add( 'is-IE' );
-	}
-	</script>
-	<?php
+<script>
+if (-1 !== navigator.userAgent.indexOf('MSIE') || -1 !== navigator.appVersion.indexOf('Trident/')) {
+    document.body.classList.add('is-IE');
+}
+</script>
+<?php
 }
 add_action( 'wp_footer', 'twentytwentyone_add_ie_class' );
 
@@ -655,3 +660,243 @@ if ( ! function_exists( 'wp_get_list_item_separator' ) ) :
 	}
 endif;
 
+
+// Add meta tags to posts
+function add_meta_tags_to_posts() {
+	global $post;
+	$post_content = $post->post_content;
+	$description = wp_trim_words(get_the_excerpt());
+	$title = get_the_title();
+	$url = get_permalink();
+	$type = get_post_type();
+	$thumbnail = get_the_post_thumbnail_url($post->ID, 'large');
+
+	?>
+<meta property="og:title" content="<?php echo $title ?>" />
+<meta property="og:description" content="<?php echo $description ?>" />
+<meta property="og:image" content="<?php echo $thumbnail ?>" />
+<meta property="og:url" content="<?php echo $url ?>" />
+<meta property="og:type" content="<?php echo $type ?>" />
+<?php
+}
+
+add_action('wp_head', 'add_meta_tags_to_posts');
+
+// Add news aggregator pgae
+function add_news_aggregator_page() {
+	add_menu_page(
+		'News Aggregator',
+		'News Aggregator',
+		'manage_options',
+		'news-aggregator',
+		'display_aggregator'
+	);
+}
+
+add_action('admin_menu', 'add_news_aggregator_page');
+
+function display_aggregator() {
+	$json_urls = array('http://localhost/module_b/games/', 'http://localhost/module_b/animation/');
+
+	$total_posts = 0;
+	$all_news = array();
+	$total_posts_per_site = array();
+
+	foreach($json_urls as $json_url) {
+		$response = wp_remote_get($json_url.'wp-json/wp/v2/posts?per_page=12');
+		$body = wp_remote_retrieve_body($response);
+		$news = json_decode($body,true);
+
+		if (!empty($news)){
+			$post_count = count($news);
+			$total_posts += $post_count;
+			$all_news = array_merge($all_news, $news);
+			$total_posts_per_site[get_site_name($json_url)] = $post_count;
+		}
+	}
+
+	if (isset($_POST['q'])) {
+		$query = $_POST['q'];
+
+		$filtered_news =array_filter($all_news, function($news_post) use ($query){return stripos($news_post['title']['rendered'], $query) !== false || stripos($news_post['excerpt']['rendered'], $query) !== false;});
+		if (!empty($filtered_news)) {
+			$all_news = $filtered_news;
+			$total_posts = count($filtered_news);
+		}
+	}
+	?>
+<div class="news-header">
+    <div class="left-side">
+        <h1>Latest News (<?php echo $total_posts ?>)</h1>
+        <form action="<?php echo admin_url('admin.php?page=news-aggregator') ?>" method="post">
+            <input type="search" name="q" value="<?php echo isset($_POST['q']) ? $_POST['q'] : '' ?>">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <div class="right-side">
+        <h3>Posts per site</h3>
+        <?php
+		foreach($total_posts_per_site as $site_name => $post_count) {
+			echo "<p>$site_name: $post_count</p>";
+		}
+		?>
+    </div>
+    <hr>
+    <?php
+	if (!empty($all_news)) {
+		foreach($all_news as $news_post){
+			?>
+    <h2>
+        <?php echo $news_post['title']['rendered'] ?>
+    </h2>
+    <p>
+        <?php echo $news_post['excerpt']['rendered'] ?>
+    </p>
+    <a href="<?php echo $news_post['link'] ?>">View</a>
+    <?php
+		}
+	}
+	?>
+</div>
+
+<?php
+}
+
+function get_site_name($site) {
+	$site_name = str_replace('http://localhost/module_b/', '', $site);
+	$site_name = trim($site_name, '/');
+	$site_name = strtoupper($site_name);
+	return $site_name;
+}
+
+function add_faq() {
+	add_menu_page(
+		'FAQ',
+		'FAQ',
+		'read',
+		'faq',
+		'display_faq'
+	);
+}
+
+add_action('admin_menu', 'add_faq');
+
+function display_faq() {
+	?>
+<h1>FAQ</h1>
+<p>This is the frequently asked questions page.</p>
+<?php
+}
+
+function change_login_logo() {
+	?>
+<style>
+h1 a {
+    background-image: url(http://localhost/module_b/games/wp-content/uploads/2023/03/wordpress-fluid-typography.png) !important;
+}
+</style>
+<?php
+}
+
+add_action('login_head', 'change_login_logo');
+
+// display latest posts for card view
+function display_latest_posts() {
+	$args = array(
+		'posts_per_page' => 5,
+		'orderBy' => 'date',
+		'order' => 'DESC'
+	);
+
+	// The Query
+$the_query = new WP_Query( $args );
+
+// The Loop
+if ( $the_query->have_posts() ) {
+	echo '<div class="card-stack">';
+	while ( $the_query->have_posts() ) {
+		$the_query->the_post();
+		$title = get_the_title();
+		$date = get_the_date('Y-m-d');
+		$link = get_permalink();
+		?>
+<div class="card">
+    <a href="<?php echo $link ?>">
+        <div class="card-content">
+            <div class="card-date">
+                Article on <?php echo $date ?>
+            </div>
+            <h2 class="card-title">
+                <?php echo $title ?>
+            </h2>
+        </div>
+    </a>
+</div>
+<?php
+	}
+	echo '</div>';
+} else {
+	// no posts found
+}
+/* Restore original Post Data */
+wp_reset_postdata();
+}
+
+function add_mini_banner_post_type() {
+	$labels = array(
+		'name' => 'Mini Banners',
+		'add_new' => 'Add New',
+		'add_new_item' => 'Add Mini Banner',
+		'edit_item' => 'Edit Mini Banner',
+		'new_item' => 'New Mini Banner',
+		'view_item' => 'View Mini Banner',
+		'view_items' => 'View Mini Banners',
+		'search_items' => 'Search Mini Banner',
+		'not_found' => 'No mini banners found',
+		'not_found_in_trash' => 'No mini banners found in trash'
+	);
+
+	$args = array(
+		'labels' => $labels,
+		'public' => true,
+		'supports' => array('title', 'thumbnail', 'custom-fields'),
+		'rewrite' => array('slug', 'mini-banners')
+	);
+
+	register_post_type('mini-banners', $args);
+}
+
+add_action('init', 'add_mini_banner_post_type');
+
+function display_mini_banners() {
+	$args = array(
+		'post_type' => 'mini-banners',
+		'posts_per_page' => 5,
+		'orderBy' => 'date',
+		'order' => 'DESC'
+	);
+
+	// The Query
+$the_query = new WP_Query( $args );
+
+// The Loop
+if ( $the_query->have_posts() ) {
+	echo '<ul>';
+	while ( $the_query->have_posts() ) {
+		$the_query->the_post();
+		$thumbnail = get_the_post_thumbnail(get_the_ID(), array(250, 100));
+		$link = get_post_meta(get_the_ID(), 'banner_url', true);
+		?>
+
+<a href="<?php echo $link ?>">
+    <?php echo $thumbnail; ?>
+</a>
+<?php
+	}
+	echo '</ul>';
+} else {
+	// no posts found
+}
+/* Restore original Post Data */
+wp_reset_postdata();
+}
