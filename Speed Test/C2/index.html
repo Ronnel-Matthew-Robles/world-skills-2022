@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Spotlight Effect</title>
+    <script src="jquery.min.js"></script>
+    <style>
+      #image-container {
+        position: relative;
+      }
+
+      #spotlight {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100px; /* initial size */
+        height: 100px; /* initial size */
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5); /* translucent white */
+        filter: blur(10px); /* blur effect */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="image-container">
+      <img src="background.jpg" alt="Image" width="300px" />
+      <div id="spotlight"></div>
+    </div>
+    <script>
+      const $image = $("img");
+      const $spotlight = $("#spotlight");
+
+      $image.on("mousemove", handleMouseMove);
+      $image.on("wheel", handleWheel);
+
+      function handleMouseMove(event) {
+        const containerRect = event.currentTarget.getBoundingClientRect();
+        const x = event.clientX - containerRect.left;
+        const y = event.clientY - containerRect.top;
+        $spotlight.css({ top: `${y}px`, left: `${x}px` });
+      }
+
+      function handleWheel(event) {
+        event.preventDefault();
+        console.log("hey");
+        const delta = Math.sign(event.deltaY);
+        const size = parseInt($spotlight.css("width")) + delta * 10;
+        if (size >= 10) {
+          $spotlight.css({ width: `${size}px`, height: `${size}px` });
+        }
+      }
+    </script>
+  </body>
+</html>

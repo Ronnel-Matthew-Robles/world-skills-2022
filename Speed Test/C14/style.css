@@ -1,0 +1,50 @@
+/* Set the background color and text color for the webpage */
+body {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+/* Center the webpage content */
+#image-container,
+#color-info,
+#magnifying-canvas {
+  margin: 0 auto;
+  display: block;
+}
+
+/* Style the header */
+h1 {
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Style the input field for selecting an image file */
+#file-input {
+  display: block;
+  margin: 30px auto;
+}
+
+/* Style the area for the selected image to be displayed */
+#image-container {
+  width: 70%;
+  margin-bottom: 30px;
+}
+
+/* Style the area for the color code and color at the mouse pointer position to be displayed */
+#color-info {
+  width: 70%;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+/* Style the canvas element for the "magnifying glass" function */
+#magnifying-canvas {
+  display: none;
+  position: absolute;
+  border: 1px solid #333;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  pointer-events: none;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Markdown Previewer</title>
+    <style>
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .left {
+        flex: 1;
+        margin: 10px;
+      }
+
+      .right {
+        flex: 1;
+        margin: 10px;
+        border: 1px solid black;
+        padding: 10px;
+        font-size: 16px;
+      }
+
+      #markdown-input {
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        resize: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left">
+        <textarea
+          id="markdown-input"
+          placeholder="Type your Markdown here..."
+        ></textarea>
+      </div>
+      <div class="right" id="markdown-output"></div>
+    </div>
+    <script>
+      const markdownInput = document.getElementById("markdown-input");
+      const markdownOutput = document.getElementById("markdown-output");
+
+      markdownInput.addEventListener("input", () => {
+        const markdown = markdownInput.value;
+        const html = convertToHtml(markdown);
+        markdownOutput.innerHTML = html;
+      });
+
+      function convertToHtml(markdown) {
+        markdown = markdown.replace(/\n/g, "<br>");
+        markdown = markdown.replace(/#(.+)/g, "<h1>$1</h1>");
+        markdown = markdown.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+        markdown = markdown.replace(/---/g, "<hr>");
+        markdown = markdown.replace(/- (.+)/gm, "<li>$1</li>");
+        markdown = markdown.replace(/<li>/, "<ul><li>");
+        markdown = markdown.replace(/<\/li>\n<li>/g, "</li><li>");
+        markdown = markdown.replace(/<\/li>$/, "</li></ul>");
+        markdown = markdown.replace(
+          /\[(.+?)\]\((.+?)\)/g,
+          "<a href='$2'>$1</a>"
+        );
+        markdown = markdown.replace(
+          /!\[(.+?)\]\((.+?)\)/g,
+          "<img src='$2' alt='$1'>"
+        );
+        return markdown;
+      }
+    </script>
+  </body>
+</html>

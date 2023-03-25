@@ -1,0 +1,31 @@
+.rating {
+  display: inline-block;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  float: right;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  background-image: url(stars.png);
+  background-position: 0 0;
+  transition: background-position 0.2s;
+}
+
+.rating input:checked + label {
+  background-position: 0 -24px;
+}
+
+.rating label:hover {
+  background-position: 0 -48px;
+}
+
+.rating input:checked + label:hover {
+  background-position: 0 -24px;
+}

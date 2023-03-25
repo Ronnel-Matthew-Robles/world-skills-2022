@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function getType(value) {
+        if (typeof value === "boolean") {
+          return "boolean";
+        } else if (typeof value === "number") {
+          return "number";
+        } else if (typeof value === "bigint") {
+          return "bigint";
+        } else if (typeof value === "string") {
+          return "string";
+        } else if (Array.isArray(value)) {
+          return "array";
+        } else if (value instanceof RegExp) {
+          return "regexp";
+        } else if (value === null) {
+          return "null";
+        } else if (typeof value === "undefined") {
+          return "undefined";
+        } else if (typeof value === "object") {
+          return "object";
+        }
+      }
+    </script>
+
+    <script src="test.js"></script>
+  </body>
+</html>

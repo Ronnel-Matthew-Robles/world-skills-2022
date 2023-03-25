@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Quiz Results</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #4caf50;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+    </style>
+    <script src="jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>Quiz Results</h1>
+    <p>
+      Run a server using <code>python -m http.server</code> due to CORS policy.
+    </p>
+    <table id="results">
+      <thead>
+        <tr>
+          <th>Question Number</th>
+          <th>Actual Answer</th>
+          <th>Submitted Answer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Rows will be added dynamically using JavaScript -->
+      </tbody>
+    </table>
+    <p id="score"></p>
+    <script src="script.js"></script>
+  </body>
+</html>

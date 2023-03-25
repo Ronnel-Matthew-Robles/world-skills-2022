@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Search Keyword Function</title>
+    <style>
+      .highlight {
+        background-color: #fdb813;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="text">
+      This is a WorldSkills Competition Paper D. In this paper, you are expected
+      to design a poster to welcome visitors to your country.
+    </p>
+    <label for="search">Search: </label>
+    <input type="text" id="search" />
+    <button onclick="highlight()">Search</button>
+    <script>
+      function highlight() {
+        var searchString = document.getElementById("search").value;
+        var text = document.getElementById("text").innerHTML;
+        var randomColor = generateRandomColor();
+        var highlightedText = text.replace(
+          new RegExp(searchString, "g"),
+          "<span class='highlight' style='background-color:" +
+            randomColor +
+            ";'>" +
+            searchString +
+            "</span>"
+        );
+        document.getElementById("text").innerHTML = highlightedText;
+      }
+
+      function generateRandomColor() {
+        var letters = "0123456789ABCDEF";
+        var color = "#";
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+.star {
+  position: relative;
+  display: block;
+  margin: 72px 0;
+  width: 0px;
+  height: 0px;
+  border-right: 120px solid transparent;
+  border-bottom: 90px solid yellow;
+  border-left: 120px solid transparent;
+  -webkit-transform: rotate(37deg);
+  -moz-transform: rotate(37deg);
+  -ms-transform: rotate(37deg);
+  -o-transform: rotate(37deg);
+  transform: rotate(37deg);
+}
+
+.star:before {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  top: -56px;
+  left: -72px;
+  content: "";
+  border-bottom: 84px solid yellow;
+  border-left: 28px solid transparent;
+  border-right: 28px solid transparent;
+  -webkit-transform: rotate(323deg);
+  -moz-transform: rotate(323deg);
+  -ms-transform: rotate(323deg);
+  -o-transform: rotate(323deg);
+  transform: rotate(323deg);
+}
+
+.star:after {
+  position: absolute;
+  display: block;
+  width: 0px;
+  height: 0px;
+  top: 0;
+  left: -120px;
+  content: "";
+  border-right: 120px solid transparent;
+  border-bottom: 90px solid yellow;
+  border-left: 120px solid transparent;
+  -webkit-transform: rotate(286deg);
+  -moz-transform: rotate(286deg);
+  -ms-transform: rotate(286deg);
+  -o-transform: rotate(286deg);
+  transform: rotate(286deg);
+}
+
+.rotating {
+  animation: rotate 2s infinite linear;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

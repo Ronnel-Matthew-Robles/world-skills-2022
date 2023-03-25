@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <html>
+    <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>3D Dice Roller</title>
+      <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+      <div class="dice-container">
+        <div class="dice">
+          <div class="face front"></div>
+          <div class="face back"></div>
+          <div class="face right"></div>
+          <div class="face left"></div>
+          <div class="face top"></div>
+          <div class="face bottom"></div>
+        </div>
+        <div class="result"></div>
+      </div>
+    </body>
+    <script>
+      const dice = document.querySelector(".dice");
+      const result = document.querySelector(".result");
+
+      dice.addEventListener("click", rollDice);
+
+      function rollDice() {
+        const random = Math.floor(Math.random() * 6) + 1;
+        result.textContent = "Result: " + random;
+        dice.classList.remove("roll");
+        void dice.offsetWidth;
+        dice.classList.add("roll");
+      }
+    </script>
+  </html>
+</html>
