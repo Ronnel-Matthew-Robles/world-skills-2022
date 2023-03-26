@@ -3,15 +3,22 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\GameScore;
 use Illuminate\Http\Request;
 
-class AssetController extends Controller
+class GamesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
         //
     }
@@ -27,7 +34,15 @@ class AssetController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(GameScore $gameScore)
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
     {
         //
     }
@@ -35,7 +50,7 @@ class AssetController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, GameScore $gameScore)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -43,7 +58,7 @@ class AssetController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(GameScore $gameScore)
+    public function destroy(string $id)
     {
         //
     }

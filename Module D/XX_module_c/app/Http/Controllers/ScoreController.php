@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class ScoreController extends Controller
 {
+    // Delete a score of a user or all the scores of a user in a specific game
     public function destroy(Score $score, Request $request)
     {
         $request->validate([
@@ -30,6 +31,7 @@ class ScoreController extends Controller
         return redirect()->back();
     }
 
+    // Delete all scores of a game
     public function destroyGame(Game $game)
     {
         $gameScores = Score::select('scores.*')
