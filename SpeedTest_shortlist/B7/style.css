@@ -1,0 +1,70 @@
+.yy {
+  width: 150px;
+  margin: 50px 0 0 125px;
+  border-top: 76px solid red;
+  border-bottom: 76px solid blue;
+  border-left: 0;
+  border-right: 0;
+  border-radius: 76px;
+  position: absolute;
+}
+
+.yin {
+  position: absolute;
+  width: 76px;
+  height: 76px;
+  border-radius: 40px;
+  background: red;
+  margin-top: -38px;
+}
+
+.yang {
+  position: absolute;
+  width: 76px;
+  height: 76px;
+  border-radius: 40px;
+  background: blue;
+  margin-top: -38px;
+  margin-left: 75px;
+}
+
+.full {
+  width: 70px;
+  height: 12px;
+  background: black;
+  margin-bottom: 8px;
+}
+
+.half {
+  background: white;
+  border-left: 30px solid black;
+  border-right: 30px solid black;
+  color: black;
+  width: 10px;
+  height: 12px;
+  margin-bottom: 8px;
+}
+
+#con1 {
+  position: absolute;
+  margin: 20px 0 0 45px;
+  transform: rotate(-45deg);
+}
+
+#con2 {
+  position: absolute;
+  margin: 175px 0 0 45px;
+  transform: rotate(45deg);
+}
+
+#con3 {
+  position: absolute;
+  margin: 20px 0 0 275px;
+  transform: rotate(45deg);
+}
+
+#con4 {
+  position: absolute;
+  margin: 175px 0 0 275px;
+  transform: rotate(-45deg);
+}
