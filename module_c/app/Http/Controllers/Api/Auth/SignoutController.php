@@ -14,8 +14,6 @@ class SignoutController extends Controller
     {
         $request->user()->currentAccessToken()->delete();
 
-        return [
-            'status' => 'success'
-        ];
+        return response()->json(['status' => 'success']);
     }
 }

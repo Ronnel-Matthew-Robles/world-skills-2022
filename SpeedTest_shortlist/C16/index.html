@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Drawing Tool</title>
+    <style>
+      #canvas-container {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        border: 1px solid black;
+      }
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      #controls {
+        margin-top: 10px;
+      }
+      #colors {
+        display: flex;
+        margin-bottom: 10px;
+      }
+      .color {
+        width: 30px;
+        height: 30px;
+        border: none;
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="canvas-container">
+      <canvas id="canvas" width="300" height="300"></canvas>
+    </div>
+    <div id="controls">
+      <button id="save-jpg">Save as JPG</button>
+      <button id="save-png">Save as PNG</button>
+      <div id="colors">
+        <button class="color" data-color="#000"></button>
+        <button class="color" data-color="#f00"></button>
+        <button class="color" data-color="#0f0"></button>
+        <button class="color" data-color="#00f"></button>
+        <button class="color" data-color="#ff0"></button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

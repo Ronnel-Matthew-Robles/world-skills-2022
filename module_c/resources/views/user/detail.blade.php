@@ -1,5 +1,7 @@
 @extends('layouts.admin')
-@section('title', $user->username)
+
+@section('title', 'User')
+
 @section('content')
-<h1>{{$user->username}}</h1>    
+    <h1>User</h1>
 @endsection

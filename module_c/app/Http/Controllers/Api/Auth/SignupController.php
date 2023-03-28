@@ -14,19 +14,18 @@ class SignupController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'username' => 'required|unique:users|min:4|max:60',
-            'password' => 'required|min:8|max:65536',
+            'username' => 'required|min:4|max:60|unique:users',
+            'password' => 'required|min:8|max:65536'
         ]);
 
-       $credentials = $request->only('username', 'password');
         $user = new User();
-        $user->username = $credentials['username'];
-        $user->password = $credentials['password'];
+        $user->username = $request->get('username');
+        $user->password = $request->get('password');
         $user->save();
 
         return response()->json([
             'status' => 'success',
-            'message' => $user->createToken('api')->plainTextToken,
+            'token' => $user->createToken('api')->plainTextToken,
         ]);
     }
 }

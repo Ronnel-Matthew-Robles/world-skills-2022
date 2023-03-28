@@ -21,11 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('v1')->middleware('json.response')->group(function() {
-    Route::apiResource('auth/signup', SignupController::class);
+Route::prefix('/v1')->group(function() {
     Route::apiResource('auth/signin', SigninController::class);
-
-    Route::middleware('auth:sanctum')->group(function() {
-        Route::apiResource('auth/signout', SignoutController::class);
-    });
+    Route::apiResource('auth/signout', SignoutController::class);
+    Route::apiResource('auth/signup', SignupController::class);
 });

@@ -13,6 +13,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.index', ['users' => Admin::all()]);
+        return view('admin.index', ['users'=>Admin::all()]);
     }
 }

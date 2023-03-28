@@ -28,27 +28,21 @@ Route::get('/admin', [AdminController::class, 'index'])->name('login');
 Route::post('/admin', [AdminController::class, 'login']);
 
 Route::middleware('auth:web')->group(function() {
-    // Logging out
     Route::get('/admin/logout', [AdminController::class, 'logout'])->name('logout');
+    
+    Route::get('/admin/user', [AdminUserController::class, 'index'])->name('admin.index');
 
-    // Displaying admin users
-    Route::get('/admin/user', [AdminUserController::class, 'index'])->name('admin.users');
+    // Redirect all other requests
+    Route::get('/', function() {
+        return redirect('/admin/user');
+    })->middleware('auth:web');
 
-    // List of users
     Route::resource('user', UserController::class);
-
-    // Blocking of user
     Route::resource('user.lock', LockController::class);
-
-    // Unblocking of user
     Route::post('/user/{user}/unlock', [UnlockController::class, 'store'])->withTrashed();
-    
-    // Game routes
-    Route::resource('game', GameController::class)->parameter('game', 'game:slug');
 
-    // Score routes
+    Route::resource('game', GameController::class)->parameter('game', 'game:slug');
     Route::resource('score', ScoreController::class);
-    
-    // Reset highscores
-    Route::delete('/score/reset-game/{game}', [ScoreController::class, 'destroyGame'])->withTrashed();
+
+    Route::delete('/score/reset-game/{path}', [ScoreController::class, 'destroygGame'])->withTrashed();
 });

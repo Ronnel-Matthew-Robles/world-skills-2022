@@ -9,11 +9,11 @@ class Score extends Model
 {
     use HasFactory;
 
-    public function gameVersion() {
-        return $this->belongsTo(GameVersion::class)->withTrashed();
-    }
-
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    public function version() {
+        return $this->belongsTo(GameVersion::class)->withTrashed();
     }
 }

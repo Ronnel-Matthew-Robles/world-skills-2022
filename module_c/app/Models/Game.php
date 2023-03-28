@@ -11,9 +11,10 @@ class Game extends Model
     use HasFactory, SoftDeletes;
 
     protected $hidden = ['id', 'created_by', 'created_at', 'updated_at', 'deleted_at'];
-    // protected $append = ['thumbnail', 'uploadTimestamp', 'author', 'scoreCount', 'gamePath'];
-    protected $date = ['uploadTimestamp'];
+    protected $append = ['author', 'scoreCount'];
+    protected $dates = ['uploadTimestamp'];
 
+    // helper functions that will fetch attributes and link them to Game
     public function gameAuthor() {
         return $this->belongsTo(User::class, 'created_by');
     }

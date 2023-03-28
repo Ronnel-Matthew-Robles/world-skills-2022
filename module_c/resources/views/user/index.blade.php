@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Admin Users')
+@section('title', 'Platform Users')
 
 @section('content')
     <h1>Platform Users</h1>
@@ -17,37 +17,37 @@
             @foreach ($users as $user)
             <tr>
                 <th scope="row">
-                <a href="{{url('/user/'.$user->id)}}">  
-                  {{$user->username}}
-                </a>
-                </th>
-                <td>{{ $user->created_at }}</td>
-                <td>{{ $user->last_login_at }}</td>
+                    <a href="{{route('user.show', ['user'=>$user])}}">
+                        {{$user->username}}
+                    </a>
+                    </th>
+                <td>{{$user->created_at}}</td>
+                <td>{{$user->last_login_at}}</td>
                 <td>
-                  @if ($user->trashed())
-                    <form action="{{ url('/user/'.$user->id.'/unlock') }}" method="post">
-                      @csrf
-                      <button type='submit'>Unlock</button>
+                    @if ($user->trashed())
+                        <form action="{{url('/user/'.$user->id.'/unlock')}}" method="post">
+                            @csrf
+                            <button type="submit">Unlock</button>
+                        </form>
+                    @else
+                    <form action="{{url('/user/'.$user->id.'/lock')}}" method="POST">
+                        @csrf
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              Lock
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li><button class="dropdown-item" type="submit" name="reason" value="spamming">Spamming</button></li>
+                              <li><button class="dropdown-item" type="submit" name="reason" value="cheating">Cheating</button></li>
+                              <li><button class="dropdown-item" type="submit" name="reason" value="other">Other</button></li>
+                            </ul>
+                          </div>
                     </form>
-                  @else
-                    <form action="{{url('/user/'.$user->id.'/lock')}}" method="post">
-                      @csrf
-                      <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Lock
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><button type='submit' name='reason' value="spamming">Spamming</button></li>
-                          <li><button type='submit' name='reason' value="cheating">Cheating</button></li>
-                          <li><button type='submit' name='reason' value="other">Other</button></li>
-                        </ul>
-                      </div>
-                    </form>
-                  @endif
+                    @endif
                 </td>
-            </tr>
+              </tr>
             @endforeach
-            
         </tbody>
       </table>
+    
 @endsection

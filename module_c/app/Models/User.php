@@ -13,12 +13,12 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
-    public static $DELETE_REASONS = [
-        'spamming' => 'spam',
-        'cheating' => 'cheating',
-        'other' => 'admin'
-    ];
-    
+    static $DELETE_REASON = [
+        'spamming' => 'You have been blocked for spamming',
+        'cheating' => 'You have been blocked for cheating',
+        'other' => 'You have been blocked by the admin',
+    ]; 
+
     /**
      * The attributes that are mass assignable.
      *

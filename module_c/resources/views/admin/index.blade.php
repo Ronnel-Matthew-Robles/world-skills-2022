@@ -13,15 +13,14 @@
           </tr>
         </thead>
         <tbody>
-          
             @foreach ($users as $user)
             <tr>
                 <th scope="row">{{$user->username}}</th>
-                <td>{{ $user->created_at }}</td>
-                <td>{{ $user->last_login_at }}</td>
-            </tr>
+                <td>{{$user->created_at}}</td>
+                <td>{{$user->last_login_at}}</td>
+              </tr>
             @endforeach
-            
         </tbody>
       </table>
+    
 @endsection

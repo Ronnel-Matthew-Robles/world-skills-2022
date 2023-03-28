@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Game;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('game_versions', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Game::class);
-            $table->string('version');
-            $table->string('storage_path');
+            $table->string('username')->unique();
+            $table->string('password');
+            $table->timestamp('last_login_at');
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('game_id')->references('id')->on('games');
+            $table->string('delete_reason')->nullable();
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('game_versions');
+        Schema::dropIfExists('users');
     }
 };
